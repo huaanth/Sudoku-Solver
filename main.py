@@ -1,11 +1,21 @@
 import random
 
 def random_board():
-    board = []
-    for i in range(1,10):
-        board.append([])
-        for j in range(1,10):
-            board[i-1].append(random.randint(1,9))
+    #a sudoku board has to have very little squares filled, ergo I only have  a max of 4 that are filled
+    board = [[0,0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0,0],]
+    num = random.randint(1,4)
+    for i in range(num):
+      x = random.randint(0,9)
+      y = random.randint(0,9)
+      board[x][y] = random.randint(1,9)
     return board
 
 
