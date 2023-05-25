@@ -45,7 +45,7 @@ def valid(board, num, pos):
             return False
     # check columns
     for i in range(0,len(board)):
-        if board[i][pos[1]]== num and pos[1] != i: 
+        if board[i][pos[1]]== num and pos[0] != i: 
             return False
     
     #check sector
