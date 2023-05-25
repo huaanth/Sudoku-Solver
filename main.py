@@ -33,19 +33,19 @@ def print_board(board):
 
 def find_empty(board):
     for i in range(len(board)):
-        for j in range(len(board[i])):
+        for j in range(len(board[0])):
             if board[i][j] == 0:
                 return (i, j)
     return None
 
 def valid(board, num, pos):
     #check row
-    for i in range(len(board[0])): #can be any number from 1-9, just chose 0
-        if board[pos[0]][i]== num and pos[1] == i: #will ignore postion that was just inputted
+    for i in range(0,len(board)): #can be any number from 1-9, just chose 0
+        if board[pos[0]][i]== num and pos[1] != i: #will ignore postion that was just inputted
             return False
     # check columns
-    for i in range(len(board)):
-        if board[i][pos[1]]== num and pos[0] == i: 
+    for i in range(0,len(board)):
+        if board[i][pos[1]]== num and pos[1] != i: 
             return False
     
     #check sector
