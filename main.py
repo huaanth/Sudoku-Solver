@@ -15,7 +15,7 @@ def random_board():
     for i in range(num):
       x = random.randint(0,9)
       y = random.randint(0,9)
-      board[x][y] = random.randint(0,9)
+      board[x][y] = random.randint(1,9)
     return board
 
 
