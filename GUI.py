@@ -1,5 +1,5 @@
 import pygame
-from main import random_board, solve, valid
+from main import random_board, solve, valid, find_empty
 import time
 
 pygame.font.init()
@@ -25,7 +25,44 @@ class Box:
         self.col = col
         self.width = width
         self.height = height
-        self.selected = False        
+        self.selected = False
+    def draw(self,win):
+        fnt = pygame.font.SysFont("timesnewroman",40)
+        dist = self.width/9
+        x = self.col *dist
+        y= self.row *dist
+
+        if self.temp!= 0 and self.value == 0:
+            text = fnt.render(str(self.temp), 1, (128,128,128))
+            win.blit(text, x+5,y+5)
+        elif self.temp !=0:
+            #need this to create the text from (1-9)
+            text = fnt.render(str(self.value), 1, (0,0,0))
+            #allows for the pixels to go on the screen
+            win.blit(text,(x+(dist - text.get_width()/2), y+(dist - text.get_width()/2)))
+        
+        if self.selected:
+            pygame.draw.rect(win,(255, 0, 0), (x,y,dist,dist),3)
+    
+    def change(self, win, w=True):
+        fnt = pygame.font.SysFont("timesnewroman",40)
+        dist = self.width/9
+        x = self.col *dist
+        y= self.row *dist
+        pygame.draw.rect(win,(255, 255, 255), (x,y,dist,dist),0)
+        text = fnt.render(str(self.value), 1, (0,0,0))
+        win.blit(text,(x+(dist - text.get_width()/2), y+(dist - text.get_width()/2)))
+
+        if w:
+            pygame.draw.rect(win,(0, 255, 0), (x,y,dist,dist),3)
+        else:
+            pygame.draw.rect(win,(255, 0, 0), (x,y,dist,dist),3)
+    
+    def set(self, val):
+        self.value = val
+    
+    def temp_set(self,val):
+        self.temp = val
         
 def main():
     win = pygame.display.set_mode((540,600))
