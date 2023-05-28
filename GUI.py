@@ -13,6 +13,27 @@ class Grid:
         self.width = width
         self.height = height
         self.win = win
+        self.boxes = [[Box(self.board[i][j],i,j,width,height) for j in range(cols)]for i in range(rows)]
+        self.model = None
+        self.update_model()
+        self.selected = None
+    
+    def update_model(self):
+        self.model =[[self.boxes[i][j].value for j in range(self.cols)] for i in range(self.rows)]
+    
+    def place (self,val):
+        row, col = self.selected
+        if self.boxes[row][col].value == 0:
+            self.boxes[row][col].set(val)
+            self.update_model()
+
+            if valid(self.model,val, (row,col)) and solve(self.model):
+                return True
+            else:
+                self.boxes[row][col].set(0)
+                self.boxes[row][col].set_temp(0)
+                self.update_model()
+                return False
 
 class Box:
     #will draw the stuff in the box
