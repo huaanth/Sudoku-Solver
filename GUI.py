@@ -67,7 +67,50 @@ class Grid:
         row,col = self.selected
         if self.boxes[row][col].value ==0:
             self.boxes[row][col].set_temp(0)
+            
+    def select(self, pos):
+        if pos[0] < self.width and pos[1] < self.height:
+            dist = self.width /9
+            x = pos[0]// dist
+            y = pos[1] // dist
+            return (int(y), int(x))
+        else:
+            return None
+    
+    def is_finished(self):
+        for i in range(self.rows):
+            for j in range(self.cols):
+                if self.boxes[i][j].value == 0:
+                    return False
+        return True
+    
+    def solve_gui(self):
+        self.update_model()
+        find = find_empty(self.model)
+        if not find:
+            return True
+        else:
+            row, col = find
 
+        for i in range(1,10):
+            if valid(self.model,i, (row,col)):
+                self.model[row][col] = i
+                self.boxes[row][col].set(i)
+                self.boxes[row][col].change(self.win, False)
+                pygame.display.update()
+                pygame.time.delay(100)
+            
+                if self.solve_gui():
+                    return True
+            
+                self.model[row][col] =0
+                self.boxes[row][col].set(0)
+                self.boxes[row][col].change(self.win, False)
+                pygame.display.update()
+                pygame.time.delay(100)
+                
+        return False
+            
 class Box:
     #will draw the stuff in the box
     rows = 9
