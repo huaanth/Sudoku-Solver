@@ -40,7 +40,33 @@ class Grid:
         self.boxes[row][col].set_temp(val)
     
     def draw(self):
-        pass
+        #lines
+        dist = self.width/9
+        for i in range(self.rows+1):
+            if i%3 == 0 and i !=0:
+                t = 4
+            else:
+                t = 1
+            pygame.draw.line(self.win, (0,0,0),(0, i*dist),(self.width, i*dist), t)
+            pygame.draw.line(self.win, (0,0,0),(i*dist,0),(self.height, i*dist), t)
+        #the boxes
+        for i in range(self.rows):
+            for j in range(self.cols):
+                self.boxes[i][j].draw(self.win)
+    
+    def select(self,row,col):
+        #will reset all other boxes and only allow one box to be selected
+        for i in range(self.rows):
+            for j in range(self.cols):
+                self.boxes[i][j].selected = False
+        
+        self.boxes[row][col].selected = True
+        self.selected = (row,col)
+
+    def clear(self):
+        row,col = self.selected
+        if self.boxes[row][col].value ==0:
+            self.boxes[row][col].set_temp(0)
 
 class Box:
     #will draw the stuff in the box
@@ -54,6 +80,7 @@ class Box:
         self.width = width
         self.height = height
         self.selected = False
+        
     def draw(self,win):
         fnt = pygame.font.SysFont("timesnewroman",40)
         dist = self.width/9
