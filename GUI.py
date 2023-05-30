@@ -34,6 +34,13 @@ class Grid:
                 self.boxes[row][col].set_temp(0)
                 self.update_model()
                 return False
+            
+    def sketch(self, val):
+        row, col = self.selected
+        self.boxes[row][col].set_temp(val)
+    
+    def draw(self):
+        pass
 
 class Box:
     #will draw the stuff in the box
