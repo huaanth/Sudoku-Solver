@@ -161,7 +161,24 @@ class Box:
     
     def temp_set(self,val):
         self.temp = val
-        
+
+def form_time(t):
+    sec = t%60
+    min = t//60
+    form = " " + str(min) +": "+str(sec)
+    return form
+
+def redraw_window(win,board,time,strikes):
+    win.fill((255,255,255))
+    #draw the time
+    fnt = pygame.font.SysFont("timesnewroman",40)
+    text = fnt.render("Time: " +form_time(time),1 ,(0,0,0))
+    win.blit(text, (540 - 160,560))
+    #draw the strikes
+    text = fnt.render("X "*strikes,1,(255,0,0))
+    win.blit(text,(20,560))
+    board.draw()
+    
 def main():
     win = pygame.display.set_mode((540,600))
     pygame.display.set_caption("Sudoku")
