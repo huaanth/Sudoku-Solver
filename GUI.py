@@ -31,13 +31,13 @@ class Grid:
                 return True
             else:
                 self.boxes[row][col].set(0)
-                self.boxes[row][col].set_temp(0)
+                self.boxes[row][col].temp_set(0)
                 self.update_model()
                 return False
             
     def sketch(self, val):
         row, col = self.selected
-        self.boxes[row][col].set_temp(val)
+        self.boxes[row][col].temp_set(val)
     
     def draw(self):
         #lines
@@ -48,7 +48,7 @@ class Grid:
             else:
                 t = 1
             pygame.draw.line(self.win, (0,0,0),(0, i*dist),(self.width, i*dist), t)
-            pygame.draw.line(self.win, (0,0,0),(i*dist,0),(self.height, i*dist), t)
+            pygame.draw.line(self.win, (0,0,0),(i*dist,0),(i*dist,self.height), t)
         #the boxes
         for i in range(self.rows):
             for j in range(self.cols):
@@ -66,7 +66,7 @@ class Grid:
     def clear(self):
         row,col = self.selected
         if self.boxes[row][col].value ==0:
-            self.boxes[row][col].set_temp(0)
+            self.boxes[row][col].temp_set(0)
             
     def click(self, pos):
         if pos[0] < self.width and pos[1] < self.height:
