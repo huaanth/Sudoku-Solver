@@ -229,4 +229,32 @@ def main():
                     key=8
                 if event.key == pygame.K_KP9:
                     key=9
+                if event.key == pygame.K_DELETE:
+                    board.clear()
+                    key = None
+                if event.key == pygame.K_SPACE:
+                    board.solve_gui()
+                if event.key == pygame.K_RETURN:
+                    row,col = board.selected
+                    if board.boxes[row][col].temp !=0:
+                        if board.place(board.boxes[row][col].temp):
+                            print("Success")
+                        else:
+                            print("Wrong")
+                            wrong +=1
+                        key = None
+                        if board.is_finished():
+                            print("Game Over")
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                pos = pygame.mouse.get_pos()
+                clicked = board.click(pos)
+                if clicked:
+                    board.select(clicked[0],clicked[1])
+                    key= None
+        if board.selected and key != None:
+            board.sketch(key)
+        redraw_window(win,board,play_time,wrong)
+        pygame.display.update()
+main()
+pygame.quit()
         
