@@ -68,7 +68,7 @@ class Grid:
         if self.boxes[row][col].value ==0:
             self.boxes[row][col].set_temp(0)
             
-    def select(self, pos):
+    def click(self, pos):
         if pos[0] < self.width and pos[1] < self.height:
             dist = self.width /9
             x = pos[0]// dist
