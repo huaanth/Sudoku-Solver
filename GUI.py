@@ -96,7 +96,8 @@ class Grid:
             if valid(self.model,i, (row,col)):
                 self.model[row][col] = i
                 self.boxes[row][col].set(i)
-                self.boxes[row][col].change(self.win, False)
+                self.boxes[row][col].change(self.win, True)
+                self.update_model()
                 pygame.display.update()
                 pygame.time.delay(100)
             
@@ -105,6 +106,7 @@ class Grid:
             
                 self.model[row][col] =0
                 self.boxes[row][col].set(0)
+                self.update_model()
                 self.boxes[row][col].change(self.win, False)
                 pygame.display.update()
                 pygame.time.delay(100)
