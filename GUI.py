@@ -132,7 +132,7 @@ class Box:
 
         if self.temp!= 0 and self.value == 0:
             text = fnt.render(str(self.temp), 1, (128,128,128))
-            win.blit(text, x+5,y+5)
+            win.blit(text, (x+5,y+5))
         elif self.temp !=0:
             #need this to create the text from (1-9)
             text = fnt.render(str(self.value), 1, (0,0,0))
