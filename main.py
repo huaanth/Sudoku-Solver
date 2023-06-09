@@ -1,4 +1,21 @@
 import random
+import collections
+
+def valid_sudoku(board):
+    cols = collections.defaultdict(set)
+    rows = collections.defaultdict(set)
+    boxes = collections.defaultdict(set)
+    #creates a collection to detect duplicates 
+    for i in range(9):
+        for j in range(9):
+            if board[i][j] == 0: #empty position
+                continue
+            if (board[i][j] in rows[i] or board[i][j] in cols[j] or board[i][j] in boxes[(i//3),(j//3)]):
+                return False #if it's already in the collections, its not valid
+            cols[j].add(board[i][j])
+            rows[i].add(board[i][j])
+            boxes[(i//3),(j//3)].add(board[i][j])
+    return True
 
 def random_board():
     #a sudoku board has to have very little squares filled, ergo I only have  a max of 4 that are filled
@@ -16,6 +33,8 @@ def random_board():
       x = random.randint(0,9)
       y = random.randint(0,9)
       board[x][y] = random.randint(1,9)
+    while valid_sudoku(board)!= True:
+        random_board() #uses recursion so that it can spawn a valid random sudoku board
     return board
 
 
