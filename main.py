@@ -18,7 +18,7 @@ def valid_sudoku(board):
     return True
 
 def random_board():
-    #a sudoku board has to have very little squares filled, ergo I only have  a max of 4 that are filled
+    
     board = [[0,0,0,0,0,0,0,0,0],
             [0,0,0,0,0,0,0,0,0],
             [0,0,0,0,0,0,0,0,0],
@@ -28,7 +28,7 @@ def random_board():
             [0,0,0,0,0,0,0,0,0],
             [0,0,0,0,0,0,0,0,0],
             [0,0,0,0,0,0,0,0,0],]
-    num = random.randint(1,4)
+    num = random.randint(1,12)
     for i in range(num):
       x = random.randint(0,9)
       y = random.randint(0,9)
